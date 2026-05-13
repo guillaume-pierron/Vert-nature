@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vert Nature — Jardinier Paysagiste</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --dark-green:  #2E4E3A;
+      --mid-green:   #6D8F6A;
+      --light-green: #A7C1A1;
+      --cream:       #E7E1D6;
+      --brown:       #8A6E4F;
+      --white:       #FFFFFF;
+      --text-dark:   #1C2B22;
+      --text-mid:    #4A5E50;
+      --ff-title:    'Playfair Display', serif;
+      --ff-body:     'Montserrat', sans-serif;
+      --radius:      4px;
+      --transition:  .3s ease;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--ff-body); color: var(--text-dark); background: var(--white); overflow-x: hidden; }
+    img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+    button { cursor: pointer; font-family: var(--ff-body); border: none; background: none; }
+    input, textarea, select { font-family: var(--ff-body); }
+
+    /* ── HELPERS ── */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .section-label {
+      font-family: var(--ff-body);
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--mid-green);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-label::before, .section-label::after {
+      content: '';
+      display: block; width: 28px; height: 1px;
+      background: var(--mid-green);
+    }
+    .section-label.left::before { display: none; }
+    .section-title {
+      font-family: var(--ff-title);
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 600;
+      color: var(--dark-green);
+      line-height: 1.2;
+      margin-top: .6rem;
+    }
+    .section-sub {
+      font-size: .95rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      max-width: 560px;
+    }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 32px;
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .btn-primary {
+      background: var(--dark-green);
+      color: var(--white);
+    }
+    .btn-primary:hover { background: #1f3829; }
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--dark-green);
+      color: var(--dark-green);
+    }
+    .btn-outline:hover { background: var(--dark-green); color: var(--white); }
+    .btn-light {
+      background: var(--white);
+      color: var(--dark-green);
+    }
+    .btn-light:hover { background: var(--cream); }
+
+    /* ── HEADER / NAV ── */
+    #header {
+      position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+      background: rgba(255,255,255,.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid rgba(46,78,58,.1);
+      transition: var(--transition);
+    }
+    #header.scrolled { box-shadow: 0 2px 20px rgba(46,78,58,.12); }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1;
+    }
+    .nav-logo-top {
+      font-family: var(--ff-title);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      letter-spacing: .04em;
+    }
+    .nav-logo-top span { color: var(--mid-green); }
+    .nav-logo-sub {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-top: 2px;
+    }
+    .nav-links {
+      display: flex; align-items: center; gap: 2px;
+    }
+    .nav-links a {
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 8px 14px;
+      border-radius: var(--radius);
+      transition: var(--transition);
+    }
+    .nav-links a:hover { color: var(--dark-green); background: rgba(46,78,58,.06); }
+    .nav-cta {
+      background: var(--dark-green);
+      color: var(--white) !important;
+      padding: 10px 20px !important;
+    }
+    .nav-cta:hover { background: #1f3829 !important; color: var(--white) !important; }
+    .nav-burger {
+      display: none;
+      flex-direction: column; gap: 5px;
+      padding: 8px;
+    }
+    .nav-burger span {
+      display: block; width: 24px; height: 2px;
+      background: var(--dark-green);
+      transition: var(--transition);
+    }
+    .mobile-menu {
+      display: none;
+      flex-direction: column;
+      background: var(--white);
+      border-top: 1px solid rgba(46,78,58,.1);
+      padding: 16px 24px 24px;
+      gap: 4px;
+    }
+    .mobile-menu a {
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--text-mid);
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(46,78,58,.06);
+      transition: var(--transition);
+    }
+    .mobile-menu a:hover { color: var(--dark-green); }
+    .mobile-menu a.mobile-cta {
+      margin-top: 12px;
+      background: var(--dark-green);
+      color: var(--white);
+      text-align: center;
+      padding: 14px;
+      border-radius: var(--radius);
+      border-bottom: none;
+    }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      height: 100vh; min-height: 640px;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url('banniere.png') center/cover no-repeat;
+    }
+    .hero-bg-pattern {
+      position: absolute; inset: 0;
+      opacity: .06;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60' viewBox='0 0 60 60'%3E%3Cpath d='M30 5 C20 15 10 20 5 30 C10 40 20 45 30 55 C40 45 50 40 55 30 C50 20 40 15 30 5Z' fill='none' stroke='%23fff' stroke-width='1'/%3E%3C/svg%3E");
+      background-size: 60px 60px;
+    }
+    .hero-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to right, rgba(28,48,40,.82) 0%, rgba(28,48,40,.4) 60%, transparent 100%);
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      padding: 0 24px;
+      margin: 0 auto 0 max(24px, calc((100vw - 1200px)/2));
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--light-green);
+      margin-bottom: 20px;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: block;
+      width: 36px; height: 1px;
+      background: var(--light-green);
+    }
+    .hero-title {
+      font-family: var(--ff-title);
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--light-green);
+    }
+    .hero-desc {
+      font-size: 1rem;
+      color: rgba(255,255,255,.78);
+      line-height: 1.7;
+      margin-bottom: 40px;
+      max-width: 480px;
+    }
+    .hero-actions { display: flex; gap: 16px; flex-wrap: wrap; }
+    .hero-services {
+      position: absolute; bottom: 0; left: 0; right: 0; z-index: 2;
+      background: var(--white);
+    }
+    .hero-services-inner {
+      max-width: 1200px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(3, 1fr);
+    }
+    .hero-service-card {
+      display: flex; align-items: center; gap: 20px;
+      padding: 28px 32px;
+      border-right: 1px solid rgba(46,78,58,.1);
+      transition: var(--transition);
+    }
+    .hero-service-card:last-child { border-right: none; }
+    .hero-service-card:hover { background: rgba(46,78,58,.04); }
+    .hero-service-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: rgba(167,193,161,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .hero-service-icon svg { width: 24px; height: 24px; stroke: var(--dark-green); }
+    .hero-service-text strong {
+      display: block;
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+    }
+    .hero-service-text span {
+      font-size: .8rem;
+      color: var(--text-mid);
+    }
+
+    /* ── ABOUT / INTRO ── */
+    #about {
+      padding: 110px 0 100px;
+      background: var(--cream);
+    }
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 80px; align-items: center;
+    }
+    .about-img-wrap {
+      position: relative;
+    }
+    .about-img-main {
+      border-radius: 6px;
+      height: 520px;
+      overflow: hidden;
+      background: var(--mid-green);
+    }
+    .about-img-main-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(135deg, #3d6650, #2E4E3A);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-img-badge {
+      position: absolute; bottom: -24px; right: -24px;
+      width: 140px; height: 140px;
+      background: var(--dark-green);
+      border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      color: var(--white);
+      text-align: center;
+      border: 5px solid var(--cream);
+    }
+    .about-img-badge strong {
+      font-family: var(--ff-title);
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+    .about-img-badge span { font-size: .68rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; opacity: .8; margin-top: 4px; }
+    .about-text { padding-bottom: 32px; }
+    .about-text .section-sub { margin: 20px 0 32px; }
+    .about-values {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 16px; margin: 32px 0;
+    }
+    .about-value {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 16px;
+      background: var(--white);
+      border-radius: var(--radius);
+    }
+    .about-value-dot {
+      width: 8px; height: 8px;
+      background: var(--mid-green);
+      border-radius: 50%;
+      flex-shrink: 0; margin-top: 6px;
+    }
+    .about-value p { font-size: .82rem; font-weight: 600; color: var(--dark-green); }
+    .about-value span { font-size: .78rem; color: var(--text-mid); }
+
+    /* ── PRESTATIONS ── */
+    #prestations {
+      padding: 110px 0 100px;
+      background: var(--white);
+    }
+    .prestations-head {
+      text-align: center; margin-bottom: 64px;
+    }
+    .prestations-head .section-label { justify-content: center; }
+    .prestations-head .section-sub { margin: 16px auto 0; text-align: center; }
+    .prestations-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    .prestation-card {
+      border: 1px solid rgba(46,78,58,.12);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: var(--transition);
+      background: var(--white);
+    }
+    .prestation-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(46,78,58,.12);
+      border-color: var(--light-green);
+    }
+    .prestation-img {
+      height: 220px;
+      background: var(--mid-green);
+      position: relative; overflow: hidden;
+    }
+    .prestation-img-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .prestation-img-placeholder svg { width: 56px; height: 56px; stroke: rgba(255,255,255,.5); }
+    .prestation-tag {
+      position: absolute; top: 16px; left: 16px;
+      background: var(--dark-green);
+      color: var(--white);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 100px;
+    }
+    .prestation-body { padding: 28px; }
+    .prestation-icon {
+      width: 52px; height: 52px;
+      background: rgba(167,193,161,.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 18px;
+    }
+    .prestation-icon svg { width: 26px; height: 26px; stroke: var(--dark-green); fill: none; }
+    .prestation-body h3 {
+      font-family: var(--ff-title);
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark-green);
+      margin-bottom: 10px;
+    }
+    .prestation-body p {
+      font-size: .85rem;
+      color: var(--text-mid);
+      line-height: 1.7;
+      margin-bottom: 20px;
+    }
+    .prestation-list { margin-bottom: 24px; }
+    .prestation-list li {
+      font-size: .8rem;
+      color: var(--text-mid);
+      padding: 5px 0;
+      display: flex; align-items: center; gap: 8px;
+      border-bottom: 1px solid rgba(46,78,58,.06);
+    }
+    .prestation-list li::before {
+      content: '';
+      display: block; width: 6px; height: 6px;
+      background: var(--mid-green);
+      border-radius: 50%; flex-shrink: 0;
+    }
+    .prestation-link {
+      font-size: .78rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      display: inline-flex; align-items: center; gap: 6px;
+      transition: var(--transition);
+    }
+    .prestation-link:hover { color: var(--mid-green); gap: 10px; }
+    .prestation-link svg { width: 16px; height: 16px; stroke: currentColor; }
+
+    /* ── REALISATIONS ── */
+    #realisations {
+      padding: 110px 0 100px;
+      background: var(--dark-green);
+    }
+    #realisations .section-title { color: var(--white); }
+    #realisations .section-label { color: var(--light-green); }
+    #realisations .section-label::before, #realisations .section-label::after { background: var(--light-green); }
+    .realisations-head {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      margin-bottom: 48px;
+    }
+    .realisations-head .section-sub { color: rgba(255,255,255,.65); }
+    .realisations-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: auto auto;
+      gap: 16px;
+    }
+    .real-card {
+      position: relative;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .real-card:first-child {
+      grid-column: 1 / 3;
+      grid-row: 1 / 3;
+    }
+    .real-card .real-img {
+      width: 100%;
+      height: 100%;
+      min-height: 220px;
+      transition: transform .5s ease;
+    }
+    .real-card:first-child .real-img { min-height: 460px; }
+    .real-placeholder {
+      width: 100%; height: 100%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .real-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(28,48,40,.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: var(--transition);
+      display: flex; align-items: flex-end;
+      padding: 24px;
+    }
+    .real-card:hover .real-overlay { opacity: 1; }
+    .real-card:hover .real-img img { transform: scale(1.06); }
+    .real-card .real-img img { transition: transform .5s ease; }
+    .real-info h4 {
+      font-family: var(--ff-title);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 4px;
+    }
+    .real-info span {
+      font-size: .75rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
+      letter-spacing: .08em;
+    }
+
+    /* ── TEMOIGNAGES ── */
+    #temoignages {
+      padding: 110px 0 100px;
+      background: var(--cream);
+    }
+    .temoignages-head {
+      text-align: center; margin-bottom: 56px;
+    }
+    .temoignages-head .section-label { justify-content: center; }
+    .temoignages-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .temoignage-card {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 32px;
+      position: relative;
+    }
+    .temo-quote {
+      font-size: 4rem;
+      line-height: 1;
+      color: var(--light-green);
+      font-family: var(--ff-title);
+      margin-bottom: 16px;
+    }
+    .temo-text {
+      font-size: .88rem;
+      color: var(--text-mid);
+      line-height: 1.75;
+      margin-bottom: 24px;
+      font-style: italic;
+    }
+    .temo-stars { display: flex; gap: 4px; margin-bottom: 16px; }
+    .temo-stars svg { width: 16px; height: 16px; fill: #f5c142; stroke: none; }
+    .temo-author {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .temo-avatar {
+      width: 46px; height: 46px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--mid-green), var(--dark-green));
+      display: flex; align-items: center; justify-content: center;
+      color: var(--white);
+      font-weight: 700; font-size: 1rem;
+      font-family: var(--ff-title);
+      flex-shrink: 0;
+    }
+    .temo-author-info strong {
+      display: block;
+      font-size: .88rem;
+      font-weight: 700;
+      color: var(--dark-green);
+    }
+    .temo-author-info span { font-size: .78rem; color: var(--text-mid); }
+
+    /* ── DEVIS ── */
+    #devis {
+      padding: 110px 0 100px;
+      background: var(--white);
+    }
+    .devis-grid {
+      display: grid; grid-template-columns: 1fr 1.4fr;
+      gap: 80px; align-items: start;
+    }
+    .devis-info .section-sub { margin: 20px 0 32px; }
+    .devis-features { display: flex; flex-direction: column; gap: 16px; }
+    .devis-feature {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px;
+      border: 1px solid rgba(46,78,58,.1);
+      border-radius: 6px;
+    }
+    .devis-feature-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+      background: rgba(167,193,161,.2);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .devis-feature-icon svg { width: 20px; height: 20px; stroke: var(--dark-green); fill: none; }
+    .devis-feature-text strong {
+      display: block;
+      font-size: .85rem;
+      font-weight: 700;
+      color: var(--dark-green);
+      margin-bottom: 2px;
+    }
+    .devis-feature-text span { font-size: .8rem; color: var(--text-mid); }
+    .devis-form-wrap {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 48px;
+    }
+    .devis-form-title {
+      font-family: var(--ff-title);
+      font-size: 1.5rem;
+      color: var(--dark-green);
+      margin-bottom: 32px;
+    }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .form-group { margin-bottom: 18px; }
+    .form-group label {
+      display: block;
+      font-size: .76rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      margin-bottom: 6px;
+    }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      width: 100%;
+      padding: 12px 16px;
+      background: var(--white);
+      border: 1.5px solid rgba(46,78,58,.15);
+      border-radius: var(--radius);
+      font-size: .9rem;
+      color: var(--text-dark);
+      transition: var(--transition);
+      outline: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--mid-green);
+      box-shadow: 0 0 0 3px rgba(109,143,106,.15);
+    }
+    .form-group textarea { min-height: 110px; resize: vertical; }
+    .form-group select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236D8F6A' stroke-width='2'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 40px; }
+    .form-submit { width: 100%; padding: 16px; margin-top: 8px; font-size: .82rem; font-weight: 700; letter-spacing: .15em; text-transform: uppercase; background: var(--dark-green); color: var(--white); border-radius: var(--radius); transition: var(--transition); }
+    .form-submit:hover { background: #1f3829; }
+    .form-note { font-size: .75rem; color: var(--text-mid); text-align: center; margin-top: 12px; }
+    .form-success {
+      display: none;
+      background: rgba(46,78,58,.08);
+      border: 1.5px solid var(--mid-green);
+      border-radius: 8px;
+      padding: 24px;
+      text-align: center;
+      margin-top: 16px;
+    }
+    .form-success svg { width: 40px; height: 40px; stroke: var(--dark-green); fill: none; margin: 0 auto 12px; }
+    .form-success p { font-size: .9rem; color: var(--dark-green); font-weight: 500; }
+
+    /* ── RDV / CALENDRIER ── */
+    #rdv {
+      padding: 110px 0 100px;
+      background: var(--dark-green);
+    }
+    #rdv .section-title { color: var(--white); }
+    #rdv .section-label { color: var(--light-green); }
+    #rdv .section-label::before, #rdv .section-label::after { background: var(--light-green); }
+    .rdv-head {
+      text-align: center; margin-bottom: 60px;
+    }
+    .rdv-head .section-label { justify-content: center; }
+    .rdv-head .section-sub { color: rgba(255,255,255,.65); margin: 16px auto 0; }
+    .rdv-container {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px; align-items: start;
+    }
+    .rdv-calendar-wrap {
+      grid-column: 1 / 3;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 32px;
+    }
+    .cal-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 28px;
+    }
+    .cal-title {
+      font-family: var(--ff-title);
+      font-size: 1.2rem;
+      color: var(--white);
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .cal-nav button {
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .cal-nav button:hover { background: rgba(255,255,255,.2); }
+    .cal-nav { display: flex; gap: 8px; }
+    .cal-grid {
+      display: grid; grid-template-columns: repeat(7, 1fr);
+      gap: 6px;
+    }
+    .cal-day-name {
+      text-align: center;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.45);
+      padding-bottom: 10px;
+    }
+    .cal-day {
+      aspect-ratio: 1;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 6px;
+      font-size: .85rem;
+      font-weight: 500;
+      color: rgba(255,255,255,.7);
+      cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+    }
+    .cal-day:hover:not(.cal-empty):not(.cal-past) {
+      background: rgba(255,255,255,.12);
+      color: var(--white);
+    }
+    .cal-day.cal-today {
+      background: rgba(167,193,161,.25);
+      color: var(--light-green);
+      font-weight: 700;
+    }
+    .cal-day.cal-selected {
+      background: var(--light-green);
+      color: var(--dark-green);
+      font-weight: 700;
+    }
+    .cal-day.cal-empty { cursor: default; }
+    .cal-day.cal-past { color: rgba(255,255,255,.2); cursor: default; }
+    .cal-day.cal-available::after {
+      content: '';
+      position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
+      width: 4px; height: 4px;
+      border-radius: 50%;
+      background: var(--light-green);
+    }
+    .cal-day.cal-selected::after { background: var(--dark-green); }
+    .rdv-slots-wrap {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 12px;
+      padding: 32px;
+      display: flex; flex-direction: column;
+    }
+    .rdv-slots-title {
+      font-family: var(--ff-title);
+      font-size: 1.1rem;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .rdv-no-date {
+      font-size: .85rem;
+      color: rgba(255,255,255,.45);
+      text-align: center;
+      padding: 40px 0;
+    }
+    .rdv-slots-list {
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .rdv-slot {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 16px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .rdv-slot:hover { background: rgba(255,255,255,.14); border-color: rgba(167,193,161,.4); }
+    .rdv-slot.slot-booked {
+      opacity: .4; cursor: not-allowed;
+      text-decoration: line-through;
+    }
+    .rdv-slot.slot-selected {
+      background: rgba(167,193,161,.2);
+      border-color: var(--light-green);
+    }
+    .rdv-slot-time {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--white);
+    }
+    .rdv-slot-status {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .rdv-slot-status.free { color: var(--light-green); }
+    .rdv-slot-status.taken { color: rgba(255,255,255,.3); }
+    .rdv-slot-status.selected-tag { color: var(--dark-green); background: var(--light-green); padding: 2px 8px; border-radius: 100px; }
+    .rdv-confirm-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 14px;
+      background: var(--light-green);
+      color: var(--dark-green);
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border-radius: var(--radius);
+      transition: var(--transition);
+      display: none;
+    }
+    .rdv-confirm-btn:hover { background: #b8d3b2; }
+    .rdv-confirm-btn.visible { display: block; }
+    .rdv-form-modal {
+      position: fixed; inset: 0; z-index: 2000;
+      background: rgba(0,0,0,.6);
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+      opacity: 0; pointer-events: none;
+      transition: var(--transition);
+    }
+    .rdv-form-modal.open { opacity: 1; pointer-events: all; }
+    .rdv-modal-inner {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 520px; width: 100%;
+      position: relative;
+      transform: translateY(20px);
+      transition: var(--transition);
+    }
+    .rdv-form-modal.open .rdv-modal-inner { transform: translateY(0); }
+    .rdv-modal-close {
+      position: absolute; top: 20px; right: 20px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: rgba(46,78,58,.08);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--dark-green);
+      font-size: 1.2rem;
+      transition: var(--transition);
+    }
+    .rdv-modal-close:hover { background: rgba(46,78,58,.16); }
+    .rdv-modal-header {
+      margin-bottom: 28px;
+    }
+    .rdv-modal-header h3 {
+      font-family: var(--ff-title);
+      font-size: 1.4rem;
+      color: var(--dark-green);
+    }
+    .rdv-modal-header p {
+      font-size: .85rem;
+      color: var(--text-mid);
+      margin-top: 8px;
+    }
+    .rdv-selected-info {
+      background: rgba(167,193,161,.15);
+      border: 1px solid rgba(167,193,161,.4);
+      border-radius: 6px;
+      padding: 14px 18px;
+      margin-bottom: 24px;
+      font-size: .88rem;
+      color: var(--dark-green);
+      font-weight: 600;
+    }
+    .rdv-selected-info span { font-weight: 400; color: var(--text-mid); }
+
+    /* ── CONTACT ── */
+    #contact {
+      padding: 110px 0 100px;
+      background: var(--cream);
+    }
+    .contact-grid {
+      display: grid; grid-template-columns: 1fr 1.2fr;
+      gap: 80px; align-items: start;
+    }
+    .contact-info .section-sub { margin: 20px 0 36px; }
+    .contact-items { display: flex; flex-direction: column; gap: 20px; }
+    .contact-item {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .contact-item-icon {
+      width: 48px; height: 48px; flex-shrink: 0;
+      background: var(--dark-green);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .contact-item-icon svg { width: 22px; height: 22px; stroke: var(--white); fill: none; }
+    .contact-item-text strong {
+      display: block;
+      font-size: .82rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--dark-green);
+      margin-bottom: 2px;
+    }
+    .contact-item-text span { font-size: .88rem; color: var(--text-mid); }
+    .contact-map {
+      border-radius: 12px;
+      overflow: hidden;
+      height: 380px;
+      background: linear-gradient(135deg, #c8d8c4, #a8bca4);
+      position: relative;
+    }
+    .contact-map-placeholder {
+      width: 100%; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 12px;
+    }
+    .contact-map-placeholder svg { width: 48px; height: 48px; stroke: var(--dark-green); fill: none; opacity: .4; }
+    .contact-map-placeholder span {
+      font-size: .8rem;
+      color: var(--dark-green);
+      opacity: .5;
+      font-weight: 500;
+    }
+
+    /* ── FOOTER ── */
+    #footer {
+      background: var(--text-dark);
+      color: rgba(255,255,255,.65);
+      padding: 60px 0 32px;
+    }
+    .footer-top {
+      display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 32px;
+    }
+    .footer-brand-name {
+      font-family: var(--ff-title);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: .04em;
+    }
+    .footer-brand-name span { color: var(--light-green); }
+    .footer-brand-sub {
+      font-size: .6rem;
+      font-weight: 600;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--brown);
+      margin-top: 2px; margin-bottom: 16px;
+    }
+    .footer-brand-desc { font-size: .82rem; line-height: 1.7; }
+    .footer-col-title {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-bottom: 18px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 10px; }
+    .footer-col ul li a {
+      font-size: .82rem;
+      color: rgba(255,255,255,.5);
+      transition: var(--transition);
+    }
+    .footer-col ul li a:hover { color: var(--light-green); }
+    .footer-bottom {
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-bottom p { font-size: .78rem; }
+    .footer-bottom-links { display: flex; gap: 24px; }
+    .footer-bottom-links a { font-size: .78rem; color: rgba(255,255,255,.4); transition: var(--transition); }
+    .footer-bottom-links a:hover { color: var(--light-green); }
+
+    /* ── SCROLL TOP ── */
+    #scrollTop {
+      position: fixed; bottom: 28px; right: 28px; z-index: 500;
+      width: 46px; height: 46px;
+      background: var(--dark-green);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: var(--transition);
+      box-shadow: 0 4px 16px rgba(46,78,58,.3);
+    }
+    #scrollTop.visible { opacity: 1; pointer-events: all; }
+    #scrollTop:hover { background: #1f3829; transform: translateY(-3px); }
+    #scrollTop svg { width: 20px; height: 20px; stroke: currentColor; }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1024px) {
+      .prestations-grid { grid-template-columns: 1fr 1fr; }
+      .realisations-grid { grid-template-columns: 1fr 1fr; }
+      .real-card:first-child { grid-column: 1; grid-row: 1; }
+      .footer-top { grid-template-columns: 1fr 1fr; }
+      .rdv-container { grid-template-columns: 1fr 1fr; }
+      .rdv-calendar-wrap { grid-column: 1; }
+    }
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .nav-burger { display: flex; }
+      .mobile-menu.open { display: flex; }
+      .about-grid, .devis-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
+      .about-img-badge { right: 0; bottom: -16px; }
+      .prestations-grid { grid-template-columns: 1fr; }
+      .realisations-grid { grid-template-columns: 1fr 1fr; }
+      .temoignages-grid { grid-template-columns: 1fr; }
+      .hero-services-inner { grid-template-columns: 1fr; }
+      .hero-service-card { border-right: none; border-bottom: 1px solid rgba(46,78,58,.1); }
+      .hero-service-card:last-child { border-bottom: none; }
+      .rdv-container { grid-template-columns: 1fr; }
+      .rdv-calendar-wrap { grid-column: 1; }
+      .footer-top { grid-template-columns: 1fr; gap: 32px; }
+      .devis-form-wrap { padding: 28px; }
+      .about-values { grid-template-columns: 1fr; }
+      .realisations-head { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .realisations-grid { grid-template-columns: 1fr; }
+      .hero-actions { flex-direction: column; }
+      .hero-actions .btn { text-align: center; justify-content: center; }
+      .rdv-modal-inner { padding: 28px; }
+    }
+
+    /* ── ANIMATIONS ── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .6s ease, transform .6s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: .1s; }
+    .fade-in-delay-2 { transition-delay: .2s; }
+    .fade-in-delay-3 { transition-delay: .3s; }
+
+    /* ── SVG ILLUSTRATIONS ── */
+    .leaf-pattern-bg {
+      position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+    }
+    .leaf-pattern-bg svg {
+      position: absolute; opacity: .04;
+      width: 360px; height: 360px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="container">
+    <nav class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <div class="nav-logo-top">VERT <span>NATURE</span></div>
+        <div class="nav-logo-sub">Jardinier • Paysagiste</div>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#about">À propos</a></li>
+        <li><a href="#prestations">Prestations</a></li>
+        <li><a href="#realisations">Réalisations</a></li>
+        <li><a href="#temoignages">Témoignages</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#devis" class="nav-cta">Devis gratuit</a></li>
+      </ul>
+      <button class="nav-burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu">
+    <a href="#about" class="mobile-link">À propos</a>
+    <a href="#prestations" class="mobile-link">Prestations</a>
+    <a href="#realisations" class="mobile-link">Réalisations</a>
+    <a href="#temoignages" class="mobile-link">Témoignages</a>
+    <a href="#contact" class="mobile-link">Contact</a>
+    <a href="#devis" class="mobile-cta">Devis gratuit</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg">
+    <div class="hero-bg-pattern"></div>
+    <!-- SVG Garden Illustration -->
+    <svg style="position:absolute;bottom:80px;right:5%;opacity:.08;width:480px;height:480px;pointer-events:none" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="100" cy="100" r="90" stroke="white" stroke-width="1.5"/>
+      <path d="M100 40 C80 55 65 70 60 90 C55 110 65 130 80 145 C90 155 100 160 100 160 C100 160 110 155 120 145 C135 130 145 110 140 90 C135 70 120 55 100 40Z" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M100 40 L100 160" stroke="white" stroke-width="1" opacity=".5"/>
+      <path d="M70 75 C85 70 100 68 115 72" stroke="white" stroke-width="1" opacity=".5"/>
+      <path d="M65 100 C80 95 100 93 120 97" stroke="white" stroke-width="1" opacity=".5"/>
+      <path d="M70 125 C85 120 100 118 115 122" stroke="white" stroke-width="1" opacity=".5"/>
+      <line x1="30" y1="180" x2="170" y2="180" stroke="white" stroke-width="1.5"/>
+      <path d="M40 180 C40 170 50 160 60 155 C60 160 55 170 55 180" stroke="white" stroke-width="1.5" fill="none"/>
+      <path d="M155 180 C155 165 145 155 135 148 C135 158 140 170 140 180" stroke="white" stroke-width="1.5" fill="none"/>
+    </svg>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Créateur d'espaces vivants</div>
+    <h1 class="hero-title">
+      Votre jardin,<br>
+      <em>notre passion</em>
+    </h1>
+    <p class="hero-desc">Conception, aménagement et entretien de jardins sur mesure. Je donne vie à vos espaces extérieurs avec harmonie et savoir-faire.</p>
+    <div class="hero-actions">
+      <a href="#prestations" class="btn btn-primary">Découvrir mes prestations</a>
+      <a href="#rdv" class="btn btn-outline" style="border-color:rgba(255,255,255,.5);color:var(--white);">Prendre rendez-vous</a>
+    </div>
+  </div>
+  <div class="hero-services">
+    <div class="hero-services-inner">
+      <div class="hero-service-card">
+        <div class="hero-service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+        </div>
+        <div class="hero-service-text">
+          <strong>Création</strong>
+          <span>Jardins sur mesure</span>
+        </div>
+      </div>
+      <div class="hero-service-card">
+        <div class="hero-service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+        </div>
+        <div class="hero-service-text">
+          <strong>Entretien</strong>
+          <span>Espaces verts</span>
+        </div>
+      </div>
+      <div class="hero-service-card">
+        <div class="hero-service-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M20 2H22v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/></svg>
+        </div>
+        <div class="hero-service-text">
+          <strong>Éco-responsable</strong>
+          <span>Des choix durables</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img-wrap fade-in">
+        <div class="about-img-main">
+          <img src="image_4.jpg" alt="Jardin fleuri aménagé par Vert Nature" />
+        </div>
+        <div class="about-img-badge">
+          <strong>15+</strong>
+          <span>ans d'expérience</span>
+        </div>
+      </div>
+      <div class="about-text fade-in fade-in-delay-1">
+        <div class="section-label left">À propos</div>
+        <h2 class="section-title">Passionné par la nature depuis toujours</h2>
+        <p class="section-sub">Jardinier paysagiste indépendant, j'accompagne mes clients dans la création, l'aménagement et l'entretien de leurs jardins et espaces verts. À l'écoute de vos envies, je conçois des extérieurs harmonieux, durables et adaptés à votre cadre de vie.</p>
+        <div class="about-values">
+          <div class="about-value">
+            <div class="about-value-dot"></div>
+            <div>
+              <p>Écoute & conseil</p>
+              <span>Chaque projet est unique</span>
+            </div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-dot"></div>
+            <div>
+              <p>Savoir-faire artisanal</p>
+              <span>Maîtrise des techniques</span>
+            </div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-dot"></div>
+            <div>
+              <p>Plantes locales</p>
+              <span>Espèces adaptées au climat</span>
+            </div>
+          </div>
+          <div class="about-value">
+            <div class="about-value-dot"></div>
+            <div>
+              <p>Délais respectés</p>
+              <span>Ponctualité garantie</span>
+            </div>
+          </div>
+        </div>
+        <a href="#devis" class="btn btn-primary">Demander un devis</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESTATIONS -->
+<section id="prestations">
+  <div class="container">
+    <div class="prestations-head fade-in">
+      <div class="section-label">Nos services</div>
+      <h2 class="section-title">Mes prestations</h2>
+      <p class="section-sub">De la conception à l'entretien, je vous propose un accompagnement complet pour transformer vos espaces extérieurs.</p>
+    </div>
+    <div class="prestations-grid">
+      <div class="prestation-card fade-in">
+        <div class="prestation-img">
+          <img src="image_2.jpg" alt="Jardin contemporain avec allées pavées" />
+          <span class="prestation-tag">Création</span>
+        </div>
+        <div class="prestation-body">
+          <div class="prestation-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>
+          </div>
+          <h3>Création de jardins</h3>
+          <p>Conception et réalisation de jardins sur mesure, de l'esquisse à la plantation finale. Chaque jardin est pensé pour s'harmoniser avec votre maison et votre style de vie.</p>
+          <ul class="prestation-list">
+            <li>Étude et plan personnalisé</li>
+            <li>Sélection végétale adaptée</li>
+            <li>Massifs fleuris & haies</li>
+            <li>Pelouses et gazons</li>
+            <li>Terrasses et allées</li>
+          </ul>
+          <a href="#devis" class="prestation-link">
+            Demander un devis
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="prestation-card fade-in fade-in-delay-1">
+        <div class="prestation-img">
+          <img src="image_3.jpg" alt="Haies et massifs fleuris entretenus" />
+          <span class="prestation-tag">Entretien</span>
+        </div>
+        <div class="prestation-body">
+          <div class="prestation-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/><path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/></svg>
+          </div>
+          <h3>Entretien d'espaces verts</h3>
+          <p>Un jardin entretenu régulièrement est un jardin sain et beau toute l'année. Je propose des contrats d'entretien adaptés à vos besoins, hebdomadaires ou mensuels.</p>
+          <ul class="prestation-list">
+            <li>Tonte et taille de haies</li>
+            <li>Désherbage et binage</li>
+            <li>Arrosage et fertilisation</li>
+            <li>Élagage d'arbres</li>
+            <li>Nettoyage saisonnier</li>
+          </ul>
+          <a href="#devis" class="prestation-link">
+            Demander un devis
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="prestation-card fade-in fade-in-delay-2">
+        <div class="prestation-img">
+          <img src="image_1.jpg" alt="Massifs fleuris naturels et plantes mellifères" />
+          <span class="prestation-tag">Éco-responsable</span>
+        </div>
+        <div class="prestation-body">
+          <div class="prestation-icon">
+            <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 2H22v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4z"/><path d="M2 22 16 8"/><path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94z"/></svg>
+          </div>
+          <h3>Aménagement éco-responsable</h3>
+          <p>Je privilégie les pratiques respectueuses de l'environnement : compostage, récupération d'eau, plantes mellifères et espèces locales pour un jardin naturel et durable.</p>
+          <ul class="prestation-list">
+            <li>Jardins naturels & sauvages</li>
+            <li>Système de récupération d'eau</li>
+            <li>Compostage et permaculture</li>
+            <li>Potagers biologiques</li>
+            <li>Plantes mellifères</li>
+          </ul>
+          <a href="#devis" class="prestation-link">
+            Demander un devis
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REALISATIONS -->
+<section id="realisations">
+  <div class="container">
+    <div class="realisations-head fade-in">
+      <div>
+        <div class="section-label">Portfolio</div>
+        <h2 class="section-title">Nos réalisations</h2>
+        <p class="section-sub">Quelques projets récents qui illustrent notre savoir-faire et notre passion pour les espaces verts.</p>
+      </div>
+      <a href="#contact" class="btn btn-light">Voir tous les projets</a>
+    </div>
+    <div class="realisations-grid fade-in">
+      <div class="real-card">
+        <div class="real-img">
+          <img src="image_6.jpg" alt="Jardin moderne avec terrasse bois et allée" />
+        </div>
+        <div class="real-overlay">
+          <div class="real-info">
+            <h4>Jardin moderne & terrasse</h4>
+            <span>Création complète • Lyon</span>
+          </div>
+        </div>
+      </div>
+      <div class="real-card">
+        <div class="real-img">
+          <img src="image_1.jpg" alt="Massifs fleuris colorés" />
+        </div>
+        <div class="real-overlay">
+          <div class="real-info">
+            <h4>Massifs fleuris</h4>
+            <span>Entretien • Villeurbanne</span>
+          </div>
+        </div>
+      </div>
+      <div class="real-card">
+        <div class="real-img">
+          <img src="image_3.jpg" alt="Haies taillées et massifs fleuris" />
+        </div>
+        <div class="real-overlay">
+          <div class="real-info">
+            <h4>Haies & massifs fleuris</h4>
+            <span>Entretien • Caluire</span>
+          </div>
+        </div>
+      </div>
+      <div class="real-card">
+        <div class="real-img">
+          <img src="image_2.jpg" alt="Jardin de façade avec allées pavées" />
+        </div>
+        <div class="real-overlay">
+          <div class="real-info">
+            <h4>Jardin de façade</h4>
+            <span>Création • Écully</span>
+          </div>
+        </div>
+      </div>
+      <div class="real-card">
+        <div class="real-img">
+          <img src="image_4.jpg" alt="Jardin anglais fleuri" />
+        </div>
+        <div class="real-overlay">
+          <div class="real-info">
+            <h4>Jardin anglais fleuri</h4>
+            <span>Création • Tassin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TEMOIGNAGES -->
+<section id="temoignages">
+  <div class="container">
+    <div class="temoignages-head fade-in">
+      <div class="section-label">Témoignages</div>
+      <h2 class="section-title">Ce que disent mes clients</h2>
+    </div>
+    <div class="temoignages-grid">
+      <div class="temoignage-card fade-in">
+        <div class="temo-quote">"</div>
+        <div class="temo-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="temo-text">Lucas a complètement transformé notre jardin. Un professionnel à l'écoute, des conseils précieux et un résultat qui dépasse nos attentes. Notre terrasse est maintenant un véritable havre de paix.</p>
+        <div class="temo-author">
+          <div class="temo-avatar">SM</div>
+          <div class="temo-author-info">
+            <strong>Sophie M.</strong>
+            <span>Propriétaire à Lyon</span>
+          </div>
+        </div>
+      </div>
+      <div class="temoignage-card fade-in fade-in-delay-1">
+        <div class="temo-quote">"</div>
+        <div class="temo-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="temo-text">Contrat d'entretien depuis 2 ans, mon jardin est impeccable en toutes saisons. Lucas est ponctuel, sérieux et passionné par son métier. Je le recommande sans hésitation à tous mes voisins.</p>
+        <div class="temo-author">
+          <div class="temo-avatar">PD</div>
+          <div class="temo-author-info">
+            <strong>Pierre D.</strong>
+            <span>Maison de campagne, Ain</span>
+          </div>
+        </div>
+      </div>
+      <div class="temoignage-card fade-in fade-in-delay-2">
+        <div class="temo-quote">"</div>
+        <div class="temo-stars">
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+          <svg viewBox="0 0 24 24"><polygon points="12,2 15.09,8.26 22,9.27 17,14.14 18.18,21.02 12,17.77 5.82,21.02 7,14.14 2,9.27 8.91,8.26"/></svg>
+        </div>
+        <p class="temo-text">Notre potager bio a été créé avec beaucoup de soin et de professionnalisme. Lucas a su nous conseiller sur les meilleures variétés et l'organisation des cultures. Résultat magnifique et pratique.</p>
+        <div class="temo-author">
+          <div class="temo-avatar">ML</div>
+          <div class="temo-author-info">
+            <strong>Marie L.</strong>
+            <span>Résidence à Caluire</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DEVIS -->
+<section id="devis">
+  <div class="container">
+    <div class="devis-grid">
+      <div class="devis-info fade-in">
+        <div class="section-label left">Tarification</div>
+        <h2 class="section-title">Votre devis<br>gratuit & sans engagement</h2>
+        <p class="section-sub">Décrivez votre projet en quelques mots et je vous réponds sous 48h avec une estimation personnalisée et transparente.</p>
+        <div class="devis-features">
+          <div class="devis-feature">
+            <div class="devis-feature-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div class="devis-feature-text">
+              <strong>Devis 100% gratuit</strong>
+              <span>Aucun engagement, réponse sous 48h</span>
+            </div>
+          </div>
+          <div class="devis-feature">
+            <div class="devis-feature-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </div>
+            <div class="devis-feature-text">
+              <strong>Visite sur place offerte</strong>
+              <span>Pour les projets de création ou grands travaux</span>
+            </div>
+          </div>
+          <div class="devis-feature">
+            <div class="devis-feature-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="devis-feature-text">
+              <strong>Tarifs transparents</strong>
+              <span>Prix clairs, pas de mauvaise surprise</span>
+            </div>
+          </div>
+          <div class="devis-feature">
+            <div class="devis-feature-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="devis-feature-text">
+              <strong>Déplacement inclus</strong>
+              <span>Dans un rayon de 40 km autour de Lyon</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="devis-form-wrap fade-in fade-in-delay-1">
+        <h3 class="devis-form-title">Décrivez votre projet</h3>
+        <form id="devisForm" novalidate>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="d-prenom">Prénom *</label>
+              <input type="text" id="d-prenom" placeholder="Jean" required />
+            </div>
+            <div class="form-group">
+              <label for="d-nom">Nom *</label>
+              <input type="text" id="d-nom" placeholder="Dupont" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="d-email">Email *</label>
+              <input type="email" id="d-email" placeholder="jean@email.fr" required />
+            </div>
+            <div class="form-group">
+              <label for="d-tel">Téléphone</label>
+              <input type="tel" id="d-tel" placeholder="06 00 00 00 00" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="d-ville">Ville / Code postal *</label>
+            <input type="text" id="d-ville" placeholder="Lyon, 69000" required />
+          </div>
+          <div class="form-group">
+            <label for="d-service">Type de prestation *</label>
+            <select id="d-service" required>
+              <option value="">Choisir une prestation...</option>
+              <option>Création de jardin</option>
+              <option>Entretien régulier</option>
+              <option>Aménagement éco-responsable</option>
+              <option>Potager biologique</option>
+              <option>Taille & élagage</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="d-surface">Surface approximative</label>
+            <select id="d-surface">
+              <option value="">Je ne sais pas encore</option>
+              <option>Moins de 50 m²</option>
+              <option>50 – 200 m²</option>
+              <option>200 – 500 m²</option>
+              <option>Plus de 500 m²</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="d-message">Décrivez votre projet *</label>
+            <textarea id="d-message" placeholder="Parlez-moi de votre espace extérieur, vos envies, vos contraintes, votre budget estimatif..." required></textarea>
+          </div>
+          <button type="submit" class="form-submit">Envoyer ma demande de devis</button>
+          <p class="form-note">* Champs obligatoires — Vos données restent confidentielles</p>
+        </form>
+        <div class="form-success" id="devisSuccess">
+          <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+          <p><strong>Demande envoyée avec succès !</strong><br>Je vous réponds sous 48h. À bientôt !</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RDV / CALENDRIER -->
+<section id="rdv">
+  <div class="container">
+    <div class="rdv-head fade-in">
+      <div class="section-label">Planning</div>
+      <h2 class="section-title">Prendre rendez-vous</h2>
+      <p class="section-sub">Choisissez un créneau disponible pour une visite sur place, une consultation ou un rendez-vous de suivi.</p>
+    </div>
+    <div class="rdv-container fade-in">
+      <div class="rdv-calendar-wrap">
+        <div class="cal-header">
+          <div class="cal-title" id="calTitle"></div>
+          <div class="cal-nav">
+            <button id="calPrev" aria-label="Mois précédent">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+            </button>
+            <button id="calNext" aria-label="Mois suivant">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cal-grid" id="calGrid"></div>
+      </div>
+      <div class="rdv-slots-wrap">
+        <div class="rdv-slots-title" id="slotsTitle">Créneaux disponibles</div>
+        <div id="slotsContent">
+          <p class="rdv-no-date">Sélectionnez une date<br>pour voir les créneaux</p>
+        </div>
+        <button class="rdv-confirm-btn" id="rdvConfirmBtn">Confirmer ce créneau</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL RDV -->
+<div class="rdv-form-modal" id="rdvModal">
+  <div class="rdv-modal-inner">
+    <button class="rdv-modal-close" id="rdvModalClose">✕</button>
+    <div class="rdv-modal-header">
+      <h3>Confirmer votre rendez-vous</h3>
+      <p>Complétez vos coordonnées pour finaliser la réservation.</p>
+    </div>
+    <div class="rdv-selected-info" id="rdvSelectedInfo"></div>
+    <form id="rdvForm" novalidate>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="r-prenom">Prénom *</label>
+          <input type="text" id="r-prenom" required placeholder="Jean" />
+        </div>
+        <div class="form-group">
+          <label for="r-nom">Nom *</label>
+          <input type="text" id="r-nom" required placeholder="Dupont" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="r-email">Email *</label>
+        <input type="email" id="r-email" required placeholder="jean@email.fr" />
+      </div>
+      <div class="form-group">
+        <label for="r-tel">Téléphone *</label>
+        <input type="tel" id="r-tel" required placeholder="06 00 00 00 00" />
+      </div>
+      <div class="form-group">
+        <label for="r-type">Type de rendez-vous</label>
+        <select id="r-type">
+          <option>Visite sur place (création)</option>
+          <option>Consultation entretien</option>
+          <option>Rendez-vous de suivi</option>
+          <option>Autre</option>
+        </select>
+      </div>
+      <button type="submit" class="form-submit" style="margin-top:8px">Confirmer le rendez-vous</button>
+    </form>
+    <div class="form-success" id="rdvSuccess" style="display:none">
+      <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="20,6 9,17 4,12"/></svg>
+      <p><strong>Rendez-vous confirmé !</strong><br>Vous recevrez une confirmation par email. À bientôt !</p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-info fade-in">
+        <div class="section-label left">Contact</div>
+        <h2 class="section-title">Parlons de<br>votre projet</h2>
+        <p class="section-sub">Vous avez une question, un projet à concrétiser ou vous souhaitez simplement un conseil ? N'hésitez pas à me contacter, je vous répondrai dans les plus brefs délais.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2H6.6a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.08 6.08l.95-.95a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 17z"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Téléphone</strong>
+              <span>06 12 34 56 78</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Email</strong>
+              <span>contact@vertnature.fr</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Zone d'intervention</strong>
+              <span>Lyon et alentours (40 km)</span>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-item-icon">
+              <svg viewBox="0 0 24 24" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12,6 12,12 16,14"/></svg>
+            </div>
+            <div class="contact-item-text">
+              <strong>Horaires</strong>
+              <span>Lun – Sam, 8h – 18h</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-map fade-in fade-in-delay-1">
+        <div class="contact-map-placeholder">
+          <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>Lyon et région Auvergne-Rhône-Alpes</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-brand-name">VERT <span>NATURE</span></div>
+        <div class="footer-brand-sub">Jardinier • Paysagiste</div>
+        <p class="footer-brand-desc">Créateur d'espaces vivants, passionné par la nature et le paysagisme durable. Intervenant dans tout le bassin lyonnais depuis plus de 15 ans.</p>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Prestations</div>
+        <ul>
+          <li><a href="#prestations">Création de jardins</a></li>
+          <li><a href="#prestations">Entretien d'espaces verts</a></li>
+          <li><a href="#prestations">Aménagement éco-responsable</a></li>
+          <li><a href="#prestations">Potagers biologiques</a></li>
+          <li><a href="#prestations">Taille & élagage</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Informations</div>
+        <ul>
+          <li><a href="#about">À propos</a></li>
+          <li><a href="#realisations">Nos réalisations</a></li>
+          <li><a href="#temoignages">Témoignages</a></li>
+          <li><a href="#devis">Devis gratuit</a></li>
+          <li><a href="#rdv">Prendre RDV</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <div class="footer-col-title">Contact</div>
+        <ul>
+          <li><a href="tel:0612345678">06 12 34 56 78</a></li>
+          <li><a href="mailto:contact@vertnature.fr">contact@vertnature.fr</a></li>
+          <li><a href="#contact">Lyon et alentours</a></li>
+          <li><a href="#rdv">Lun – Sam, 8h – 18h</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2026 Vert Nature — Lucas Morel, Jardinier Paysagiste</p>
+      <div class="footer-bottom-links">
+        <a href="#">Mentions légales</a>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">CGV</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" aria-label="Retour en haut">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+</button>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── HEADER SCROLL ── */
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 40);
+    document.getElementById('scrollTop').classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  /* ── MOBILE MENU ── */
+  const burger = document.getElementById('burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => mobileMenu.classList.toggle('open'));
+  document.querySelectorAll('.mobile-link, .mobile-cta').forEach(link =>
+    link.addEventListener('click', () => mobileMenu.classList.remove('open'))
+  );
+
+  /* ── SCROLL TOP ── */
+  document.getElementById('scrollTop').addEventListener('click', () =>
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  );
+
+  /* ── FADE IN OBSERVER ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ── DEVIS FORM ── */
+  document.getElementById('devisForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(f => { if (!f.value.trim()) { f.style.borderColor = '#c0392b'; valid = false; } else { f.style.borderColor = ''; } });
+    if (!valid) return;
+    this.style.display = 'none';
+    const success = document.getElementById('devisSuccess');
+    success.style.display = 'block';
+  });
+
+  /* ── CALENDAR ── */
+  const MONTHS_FR = ['Janvier','Février','Mars','Avril','Mai','Juin','Juillet','Août','Septembre','Octobre','Novembre','Décembre'];
+  const DAYS_FR   = ['Lun','Mar','Mer','Jeu','Ven','Sam','Dim'];
+  const today = new Date();
+  today.setHours(0,0,0,0);
+
+  let currentYear  = today.getFullYear();
+  let currentMonth = today.getMonth();
+  let selectedDate = null;
+  let selectedSlot = null;
+
+  const BOOKED = ['09:00','14:00'];
+
+  function buildAvailableDays(year, month) {
+    const available = new Set();
+    const d = new Date(year, month, 1);
+    while (d.getMonth() === month) {
+      const dow = d.getDay();
+      if (dow !== 0 && d >= today) available.add(d.getDate());
+      d.setDate(d.getDate() + 1);
+    }
+    return available;
+  }
+
+  function renderCalendar(year, month) {
+    document.getElementById('calTitle').textContent = MONTHS_FR[month] + ' ' + year;
+    const grid = document.getElementById('calGrid');
+    grid.innerHTML = '';
+
+    DAYS_FR.forEach(d => {
+      const el = document.createElement('div');
+      el.className = 'cal-day-name'; el.textContent = d;
+      grid.appendChild(el);
+    });
+
+    const firstDay = new Date(year, month, 1).getDay();
+    const offset   = (firstDay === 0) ? 6 : firstDay - 1;
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+    const available = buildAvailableDays(year, month);
+
+    for (let i = 0; i < offset; i++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day cal-empty';
+      grid.appendChild(el);
+    }
+
+    for (let day = 1; day <= daysInMonth; day++) {
+      const el = document.createElement('div');
+      el.className = 'cal-day';
+      el.textContent = day;
+
+      const d = new Date(year, month, day);
+      d.setHours(0,0,0,0);
+
+      if (d < today) {
+        el.classList.add('cal-past');
+      } else {
+        if (d.getTime() === today.getTime()) el.classList.add('cal-today');
+        if (available.has(day))            el.classList.add('cal-available');
+        if (selectedDate &&
+            d.getFullYear() === selectedDate.getFullYear() &&
+            d.getMonth()    === selectedDate.getMonth() &&
+            d.getDate()     === selectedDate.getDate())   el.classList.add('cal-selected');
+
+        if (available.has(day)) {
+          el.addEventListener('click', () => {
+            selectedDate = new Date(year, month, day);
+            selectedSlot = null;
+            renderCalendar(year, month);
+            renderSlots();
+          });
+        }
+      }
+      grid.appendChild(el);
+    }
+  }
+
+  const SLOTS = ['08:00','09:00','10:00','11:00','14:00','15:00','16:00','17:00'];
+
+  function renderSlots() {
+    const content = document.getElementById('slotsContent');
+    const title   = document.getElementById('slotsTitle');
+    const btn     = document.getElementById('rdvConfirmBtn');
+
+    if (!selectedDate) {
+      content.innerHTML = '<p class="rdv-no-date">Sélectionnez une date<br>pour voir les créneaux</p>';
+      title.textContent = 'Créneaux disponibles';
+      btn.classList.remove('visible');
+      return;
+    }
+
+    const opts = { weekday:'long', day:'numeric', month:'long' };
+    title.textContent = selectedDate.toLocaleDateString('fr-FR', opts);
+
+    const dow = selectedDate.getDay();
+    if (dow === 0) {
+      content.innerHTML = '<p class="rdv-no-date">Fermé le dimanche</p>';
+      btn.classList.remove('visible');
+      return;
+    }
+
+    const list = document.createElement('div');
+    list.className = 'rdv-slots-list';
+
+    SLOTS.forEach(time => {
+      const isBooked = BOOKED.includes(time) && selectedDate.getDate() % 3 === 0;
+      const el = document.createElement('div');
+      el.className = 'rdv-slot' + (isBooked ? ' slot-booked' : '');
+
+      const isSelected = selectedSlot === time && !isBooked;
+      if (isSelected) el.classList.add('slot-selected');
+
+      el.innerHTML = `<span class="rdv-slot-time">${time}</span>
+        <span class="rdv-slot-status ${isBooked ? 'taken' : isSelected ? 'selected-tag' : 'free'}">${isBooked ? 'Réservé' : isSelected ? '✓ Sélectionné' : 'Disponible'}</span>`;
+
+      if (!isBooked) {
+        el.addEventListener('click', () => {
+          selectedSlot = time;
+          renderSlots();
+          btn.classList.add('visible');
+        });
+      }
+      list.appendChild(el);
+    });
+
+    content.innerHTML = '';
+    content.appendChild(list);
+    if (!selectedSlot) btn.classList.remove('visible');
+  }
+
+  document.getElementById('calPrev').addEventListener('click', () => {
+    currentMonth--;
+    if (currentMonth < 0) { currentMonth = 11; currentYear--; }
+    renderCalendar(currentYear, currentMonth);
+  });
+  document.getElementById('calNext').addEventListener('click', () => {
+    currentMonth++;
+    if (currentMonth > 11) { currentMonth = 0; currentYear++; }
+    renderCalendar(currentYear, currentMonth);
+  });
+
+  renderCalendar(currentYear, currentMonth);
+  renderSlots();
+
+  /* ── RDV MODAL ── */
+  const modal      = document.getElementById('rdvModal');
+  const modalClose = document.getElementById('rdvModalClose');
+  const confirmBtn = document.getElementById('rdvConfirmBtn');
+  const rdvInfo    = document.getElementById('rdvSelectedInfo');
+
+  confirmBtn.addEventListener('click', () => {
+    if (!selectedDate || !selectedSlot) return;
+    const opts = { weekday:'long', day:'numeric', month:'long', year:'numeric' };
+    rdvInfo.innerHTML = `<strong>Date :</strong> <span>${selectedDate.toLocaleDateString('fr-FR', opts)}</span><br>
+      <strong>Heure :</strong> <span>${selectedSlot}</span>`;
+    modal.classList.add('open');
+  });
+  modalClose.addEventListener('click', () => modal.classList.remove('open'));
+  modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('open'); });
+
+  document.getElementById('rdvForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const required = this.querySelectorAll('[required]');
+    let valid = true;
+    required.forEach(f => { if (!f.value.trim()) { f.style.borderColor = '#c0392b'; valid = false; } else { f.style.borderColor = ''; } });
+    if (!valid) return;
+    this.style.display = 'none';
+    document.getElementById('rdvSuccess').style.display = 'block';
+    selectedSlot = null;
+    renderSlots();
+  });
+
+  /* ── SMOOTH SCROLL for nav links ── */
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', e => {
+      const target = document.querySelector(link.getAttribute('href'));
+      if (!target) return;
+      e.preventDefault();
+      const offset = 72;
+      const top = target.getBoundingClientRect().top + window.scrollY - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    });
+  });
+})();
+</script>
+</body>
+</html>
