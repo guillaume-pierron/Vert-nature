@@ -8,7 +8,7 @@ $assets = get_template_directory_uri() . '/assets/images/';
 
 // Hero
 $hero_bg_img  = function_exists('get_field') ? get_field('hero_bg_image')  : null;
-$hero_bg_url  = $hero_bg_img ? ( is_array($hero_bg_img) ? $hero_bg_img['url'] : wp_get_attachment_url($hero_bg_img) ) : $assets . 'banner_img.jpg';
+$hero_bg_url  = $hero_bg_img ? ( is_array($hero_bg_img) ? $hero_bg_img['url'] : wp_get_attachment_url($hero_bg_img) ) : $assets . 'banner_img.webp';
 $hero_eyebrow = function_exists('get_field') ? get_field('hero_eyebrow')     : "Créateur d'espaces vivants";
 $hero_title   = function_exists('get_field') ? get_field('hero_title')       : 'Votre jardin,';
 $hero_title_em= function_exists('get_field') ? get_field('hero_title_em')    : 'ma passion';
@@ -20,7 +20,7 @@ $hero_desc    = $hero_desc    ?: "Conception, aménagement et entretien de jardi
 
 // About
 $about_img_raw = function_exists('get_field') ? get_field('about_image') : null;
-$about_img_url = $about_img_raw ? ( is_array($about_img_raw) ? $about_img_raw['url'] : wp_get_attachment_url($about_img_raw) ) : $assets . 'glass-greenhouse.jpg';
+$about_img_url = $about_img_raw ? ( is_array($about_img_raw) ? $about_img_raw['url'] : wp_get_attachment_url($about_img_raw) ) : $assets . 'glass-greenhouse.webp';
 $about_title   = function_exists('get_field') ? get_field('about_title')              : 'Passionné par la nature depuis toujours';
 $about_desc    = function_exists('get_field') ? get_field('about_description')        : "Jardinier paysagiste indépendant, j'accompagne mes clients dans la création, l'aménagement et l'entretien de leurs jardins et espaces verts.";
 $about_exp_num = function_exists('get_field') ? get_field('about_experience_number') : '15+';
@@ -37,7 +37,7 @@ $services_defaults = array(
         'desc'  => 'Conception et réalisation de jardins sur mesure, de l\'esquisse à la plantation finale.',
         'tag'   => 'Création',
         'price' => 'À partir de <strong>80 € / m²</strong>',
-        'img'   => $assets . 'image_2.jpg',
+        'img'   => $assets . 'image_2.webp',
         'list'  => array('Étude et plan personnalisé','Sélection végétale adaptée','Massifs fleuris & haies','Pelouses et gazons','Terrasses et allées'),
     ),
     2 => array(
@@ -45,7 +45,7 @@ $services_defaults = array(
         'desc'  => 'Un jardin entretenu régulièrement est un jardin sain et beau toute l\'année.',
         'tag'   => 'Entretien',
         'price' => 'À partir de <strong>45 € / heure</strong>',
-        'img'   => $assets . 'image_3.jpg',
+        'img'   => $assets . 'image_3.webp',
         'list'  => array('Tonte et taille de haies','Désherbage et binage','Arrosage et fertilisation','Élagage d\'arbres','Nettoyage saisonnier'),
     ),
     3 => array(
@@ -65,17 +65,17 @@ $services_icons = array(
 
 // Portfolio
 $port_feat_img_raw = function_exists('get_field') ? get_field('portfolio_featured_image')    : null;
-$port_feat_img_url = $port_feat_img_raw ? ( is_array($port_feat_img_raw) ? $port_feat_img_raw['url'] : wp_get_attachment_url($port_feat_img_raw) ) : $assets . 'image_6.jpg';
+$port_feat_img_url = $port_feat_img_raw ? ( is_array($port_feat_img_raw) ? $port_feat_img_raw['url'] : wp_get_attachment_url($port_feat_img_raw) ) : $assets . 'image_6.webp';
 $port_feat_title   = function_exists('get_field') ? get_field('portfolio_featured_title')    : 'Aménagement de jardin contemporain';
 $port_feat_location= function_exists('get_field') ? get_field('portfolio_featured_location') : 'Lyon (69)';
 $port_feat_title    = $port_feat_title    ?: 'Aménagement de jardin contemporain';
 $port_feat_location = $port_feat_location ?: 'Lyon (69)';
 
 $portfolio_cards_defaults = array(
-    1 => array('img' => $assets . 'colorful-flower-garden.jpg', 'title' => 'Jardin naturel & fleuri',   'location' => 'Villeurbanne (69)'),
-    2 => array('img' => $assets . 'beautiful-green-park.jpg',   'title' => 'Jardin à la française',     'location' => 'Caluire-et-Cuire (69)'),
-    3 => array('img' => $assets . 'image_2.jpg',                'title' => 'Cour & allée paysagère',    'location' => 'Écully (69)'),
-    4 => array('img' => $assets . 'image_3.jpg',                'title' => 'Massifs & plantations',     'location' => 'Tassin-la-Demi-Lune (69)'),
+    1 => array('img' => $assets . 'colorful-flower-garden.webp', 'title' => 'Jardin naturel & fleuri',   'location' => 'Villeurbanne (69)'),
+    2 => array('img' => $assets . 'beautiful-green-park.webp',   'title' => 'Jardin à la française',     'location' => 'Caluire-et-Cuire (69)'),
+    3 => array('img' => $assets . 'image_2.webp',                'title' => 'Cour & allée paysagère',    'location' => 'Écully (69)'),
+    4 => array('img' => $assets . 'image_3.webp',                'title' => 'Massifs & plantations',     'location' => 'Tassin-la-Demi-Lune (69)'),
 );
 $portfolio_cards_icons = array(
     1 => '<svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 1 0 20A10 10 0 0 1 2 12"/><path d="M12 2C8 6 7 10 8 14c1 3 3 5 4 8"/><path d="M12 2c4 4 5 8 4 12-1 3-3 5-4 8"/></svg>',
@@ -108,7 +108,7 @@ $temo_defaults = array(
 
 // Devis form image
 $devis_img_raw = function_exists('get_field') ? get_field('devis_form_image') : null;
-$devis_img_url = $devis_img_raw ? ( is_array($devis_img_raw) ? $devis_img_raw['url'] : wp_get_attachment_url($devis_img_raw) ) : $assets . 'grassland-landscape-greening-environment-park-background.jpg';
+$devis_img_url = $devis_img_raw ? ( is_array($devis_img_raw) ? $devis_img_raw['url'] : wp_get_attachment_url($devis_img_raw) ) : $assets . 'grassland-landscape-greening-environment-park-background.webp';
 
 // Contact
 $contact_phone = function_exists('get_field') ? get_field('contact_phone') : '06 12 34 56 78';
@@ -188,7 +188,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
 <!-- ══════════════════════════════════════════════════════════
      À PROPOS
 ══════════════════════════════════════════════════════════════ -->
-<section id="about" style="background-image: url('<?php echo esc_url( $assets . 'contact_section_img.png' ); ?>')">
+<section id="about" style="background-image: url('<?php echo esc_url( $assets . 'contact_section_img.webp' ); ?>')">
   <div class="container">
     <div class="about-grid">
       <!-- Image -->
@@ -320,7 +320,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
 <!-- ══════════════════════════════════════════════════════════
      RÉALISATIONS
 ══════════════════════════════════════════════════════════════ -->
-<section id="realisations" style="background-image: url('<?php echo esc_url( $assets . 'réalisations_img.png' ); ?>')">
+<section id="realisations" style="background-image: url('<?php echo esc_url( $assets . 'réalisations_img.webp' ); ?>')">
   <div class="container">
     <div class="realisations-head fade-in">
       <div class="real-header-left">
@@ -615,7 +615,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
 <!-- ══════════════════════════════════════════════════════════
      RDV / CALENDRIER
 ══════════════════════════════════════════════════════════════ -->
-<section id="rdv" style="background-image: url('<?php echo esc_url( $assets . 'background_plaaning.png' ); ?>')">
+<section id="rdv" style="background-image: url('<?php echo esc_url( $assets . 'background_planing.webp' ); ?>')">
   <div class="container">
     <div class="rdv-head fade-in">
       <div class="section-label">Planning</div>
