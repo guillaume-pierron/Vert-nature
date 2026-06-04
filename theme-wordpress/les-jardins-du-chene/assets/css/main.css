@@ -51,8 +51,11 @@ input, textarea, select { font-family: var(--ff-body); }
 .nav-cta { background: var(--dark-green); color: var(--white) !important; padding: 10px 20px !important; }
 .nav-cta:hover { background: #1f3829 !important; color: var(--white) !important; }
 .nav-burger { display: none; flex-direction: column; gap: 5px; padding: 8px; }
-.nav-burger span { display: block; width: 24px; height: 2px; background: var(--dark-green); transition: var(--transition); }
-.mobile-menu { display: none; flex-direction: column; background: var(--white); border-top: 1px solid rgba(46,78,58,.1); padding: 16px 24px 24px; gap: 4px; }
+.nav-burger span { display: block; width: 24px; height: 2px; background: var(--dark-green); transition: transform .3s ease, opacity .3s ease; }
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-menu { display: flex; flex-direction: column; background: var(--white); border-top: 1px solid rgba(46,78,58,.1); padding: 0 24px; gap: 4px; max-height: 0; overflow: hidden; opacity: 0; transition: max-height .35s ease, opacity .25s ease, padding .35s ease; }
 .mobile-menu a { font-size: .85rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--text-mid); padding: 12px 0; border-bottom: 1px solid rgba(46,78,58,.06); transition: var(--transition); }
 .mobile-menu a:hover { color: var(--dark-green); }
 .mobile-menu a.mobile-cta { margin-top: 12px; background: var(--dark-green); color: var(--white); text-align: center; padding: 14px; border-radius: var(--radius); border-bottom: none; }
@@ -345,7 +348,7 @@ input, textarea, select { font-family: var(--ff-body); }
 @media (max-width: 768px) {
   .nav-links { display: none; }
   .nav-burger { display: flex; }
-  .mobile-menu.open { display: flex; }
+  .mobile-menu.open { max-height: 600px; opacity: 1; padding: 16px 24px 24px; }
   .about-grid, .devis-grid, .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .prestations-grid { grid-template-columns: 1fr; }
   .realisations-grid { grid-template-columns: 1fr; }
