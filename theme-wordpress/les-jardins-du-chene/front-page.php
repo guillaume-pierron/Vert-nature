@@ -473,7 +473,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
     <div class="devis-grid">
       <!-- Colonne info -->
       <div class="devis-info fade-in">
-        <div class="section-label left">Tarification</div>
+        <div class="section-label left">Devis</div>
         <h2 class="section-title">Votre devis<br>gratuit &amp; sans engagement</h2>
         <p class="section-sub">Décrivez votre projet en quelques mots et je vous réponds sous 48h avec une estimation personnalisée et transparente.</p>
         <div class="devis-features">
