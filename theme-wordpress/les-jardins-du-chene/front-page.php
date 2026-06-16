@@ -538,7 +538,9 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       </div>
       <!-- Formulaire -->
       <div class="devis-form-wrap fade-in fade-in-delay-1">
-        <img src="<?php echo esc_url($devis_img_url); ?>" alt="Jardin aménagé par Les Jardins du Chêne" class="devis-form-img" />
+        <div class="devis-form-img-wrap">
+          <img src="<?php echo esc_url($devis_img_url); ?>" alt="Jardin aménagé par Les Jardins du Chêne" class="devis-form-img" />
+        </div>
         <div class="devis-form-body">
           <h3 class="devis-form-title">
             Décrivez votre projet

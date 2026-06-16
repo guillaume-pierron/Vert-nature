@@ -211,6 +211,8 @@ input, textarea, select { font-family: var(--ff-body); }
 .devis-stat-value { font-family: var(--ff-title); font-size: 1.4rem; font-weight: 700; color: var(--dark-green); line-height: 1; }
 .devis-stat-label { font-size: .72rem; color: var(--text-mid); margin-top: 3px; }
 .devis-form-wrap { background: var(--white); border-radius: 16px; overflow: hidden; box-shadow: 0 8px 48px rgba(46,78,58,.13); padding: 0; position: relative; }
+.devis-form-img-wrap { position: relative; }
+.devis-form-img-wrap::after { content: ''; position: absolute; inset: 0; background: rgba(46,78,58,.65); }
 .devis-form-img { width: 100%; height: 200px; object-fit: cover; display: block; }
 .devis-form-body { padding: 32px 36px 36px; position: relative; }
 .devis-form-title { font-family: var(--ff-title); font-size: 1.35rem; color: var(--dark-green); margin-bottom: 22px; display: flex; align-items: center; gap: 10px; }
