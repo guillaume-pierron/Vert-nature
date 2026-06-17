@@ -214,7 +214,7 @@ $contact_hours = $contact_hours ?: 'Lun – Sam, 8h – 18h';
       <!-- Texte -->
       <div class="about-text fade-in fade-in-delay-1">
         <div class="about-label">
-          <?php echo ljc_icon('leaf'); ?>
+          <?php echo $load_icon('flower_2.svg'); ?>
           À propos
         </div>
         <h2 class="section-title"><?php echo esc_html( $about_title ); ?></h2>
