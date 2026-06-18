@@ -487,4 +487,23 @@ acf_add_local_field_group( array(
     ) ) ),
 ) );
 
+/* ── Politique de cookies ── */
+acf_add_local_field_group( array(
+    'key'    => 'group_politique_cookies',
+    'title'  => 'Contenu de la page',
+    'fields' => array( array(
+        'key'          => 'field_cookies_content',
+        'name'         => 'legal_content',
+        'label'        => 'Contenu',
+        'type'         => 'wysiwyg',
+        'toolbar'      => 'full',
+        'media_upload' => 0,
+    ) ),
+    'location' => array( array( array(
+        'param'    => 'page_template',
+        'operator' => '==',
+        'value'    => 'page-politique-de-cookies.php',
+    ) ) ),
+) );
+
 endif; // function_exists('acf_add_local_field_group')

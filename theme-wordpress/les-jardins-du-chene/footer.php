@@ -51,6 +51,7 @@
         <a href="<?php echo esc_url( home_url( '/mentions-legales/' ) ); ?>">Mentions légales</a>
         <a href="<?php echo esc_url( home_url( '/politique-de-confidentialite/' ) ); ?>">Politique de confidentialité</a>
         <a href="<?php echo esc_url( home_url( '/cgv/' ) ); ?>">CGV</a>
+        <a href="<?php echo esc_url( home_url( '/politique-de-cookies/' ) ); ?>">Politique de cookies</a>
       </div>
     </div>
   </div>

@@ -427,3 +427,11 @@ input, textarea, select { font-family: var(--ff-body); }
 .legal-body ul li::before { content: '—'; position: absolute; left: 0; color: var(--dark-green); font-weight: 600; }
 .legal-body a { color: var(--dark-green); text-decoration: underline; }
 .legal-body strong { color: var(--text-dark); }
+
+/* ── Complianz banner delay ── */
+.cmplz-cookiebanner { animation: cmplz-appear .4s ease 3s both; }
+@keyframes cmplz-appear {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
